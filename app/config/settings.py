@@ -26,6 +26,9 @@ secrets = json.load(open(os.path.join(SECRET_DIR, 'base.json')))
 
 SECRET_KEY = secrets['SECRET_KEY']
 
+# Auth User Model
+AUTH_USER_MODEL = 'members.User'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
@@ -46,6 +49,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
+    '127.0.0.1'
 ]
 
 
