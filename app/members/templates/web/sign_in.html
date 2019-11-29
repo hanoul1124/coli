@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang = "en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign-in</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+
+
+    <style type ="text/css">
+
+
+      body{background-color:#F4F4F4;}
+
+      #div_root{margin:auto; float:left;
+                 }
+      #div_sidepart{width : 50%; float: left}
+      #div_top{
+        width:100%; height :30px;
+        float:left;
+      }
+      #div_line{width:100%; float:left;}
+      #div_imagepart{width:50%; text-align : left;
+
+        float: right;
+
+      }
+      #div_textbox{width:100%; float: left; text-align :center;}
+
+      #div_down{width:100%; float : left; text-align: center; }
+
+      #loginer
+      {width: 100%;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  text-align: center;
+  }
+
+
+
+      input.down-button {
+        background: url( "https://blogfiles.pstatic.net/MjAxOTExMjdfNzIg/MDAxNTc0ODQ5MTU4Njkw.HdTRMdtuzdsBt7F1Ni4hbXI3Oeb0Kl4kFa9G3RNz6lEg.u6S2QVdyninHGXJZNhsu5LLjxKb2zTxsJ9dIK-3XynUg.PNG.shjthd92/circulardownarrowbutton_122027.png?type=w1" ) no-repeat;
+        border: none;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;}
+
+
+              input.up-button {
+                background: url( "https://blogfiles.pstatic.net/MjAxOTExMjdfMjg5/MDAxNTc0ODUyMzk4NTYz.cc5ZSN45WcC6vPOZ3y-LpkgwHXqNQIZYOsBHkJo_pPog.gTxAuWevDni2-Vr5LbaHpv6Raqx1xXVobfGQtLKo0wUg.PNG.shjthd92/circulardownarrowbutton_122027.png?type=w1" ) no-repeat;
+                border: none;
+                width: 32px;
+                height: 32px;
+                cursor: pointer;}
+
+
+
+  </style>
+  </head>
+
+  <body >
+
+    <div class = "div_root">
+      <div id = "div_top" ><div class = "container"><img src = "https://blogfiles.pstatic.net/MjAxOTExMjdfMSAg/MDAxNTc0ODQ2NzA5NzAw.FE7TBgcjwN7y3o_wMyQIY9UKWp6_ZqDg12hLixOB-hcg.HACsjzQpyNWCkdeFikVCduOSVZSLHHRrJf7PjZq4crkg.PNG.shjthd92/KakaoTalk_20191107_160754250_01.png?type=w1"width = 50px>
+                          <button type = "button" class="btn btn-outline-secondary" style = "float:right; margin:5px">contact us</button>
+                          <button type = "button" class="btn btn-outline-secondary" style = "float:right; margin:5px">sign up</button>
+
+
+                          <button type = "button" class="btn btn-outline-secondary" style = "float:right; margin:5px" onClick="location.href='sign_in.html'">sign in</button></div></div>
+      <div id = "div_line"><hr></div>
+
+      <div id = "div_down"> <input type= "button" class = "up-button" onClick = "location.href='COLI_main.html'"></div>
+<div style="clear:both;"></div>
+      <div id ="div_imagepart"><img src = "https://blogfiles.pstatic.net/MjAxOTExMjZfMjUy/MDAxNTc0NzY3NDE1NzAz.6j0G1ZyeFWgYm82lfgQoi96276KvJybkpfIC66r7LRgg.EgKgu7YevwQz8NzfRG4rK48IAMCN1WPAHtuJ6TvLVJ0g.PNG.shjthd92/dog-1517090_1280.png?type=w1"width = 60%> </div>
+      <div id = "div_sidepart">
+      <div id = "div_textbox">
+        <br><br><br>
+        <p class = "font-weight-bold" style = "font-size:large;">COLI : Pet DID Service</p>
+          <p class = "font-weight-bold"> Sign in and Get an access to Our all Services</p></div>
+          <div style="clear:both;"></div>
+
+          <div id="loginer">
+
+          <form action="main_login.html" method="post" enctype="multipart/form-data">
+            <fieldset>
+
+              <input type="text" name="id" placeholder="Enter Your ID">
+              <br><br>
+              <input type="password" name="pwd1" placeholder="Enter Your Password">
+              <br><br>
+              <button type="submit" class = "btn btn-primary">Sign In</button>
+              <br>
+              <br>
+              <a href = "sign_up.html">Sign Up for free</a>
+            </fieldset>
+
+        </div>
+      </div></div>
+
+    <div style="clear:both;"></div>
+
+
+
+
+    </div>
+
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  </body>
+</html>
