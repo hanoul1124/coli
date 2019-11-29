@@ -38,3 +38,7 @@ def login(request):
         raise Http404("404 Not Found.")
 
     return render(request, 'web/main_login.html', {})
+
+def sign_up(request):
+    # 아직 구현이 안됨.
+    return render(request, 'web/COLI_main.html', {})

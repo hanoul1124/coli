@@ -10,4 +10,5 @@ urlpatterns = [
     path('sign_in/', sign_in_page),
     path('sign_up/', sign_up_page),
     path('login/', login),
+    path('sign_up_do/', sign_up),
 ]
