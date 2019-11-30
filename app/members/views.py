@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import Http404
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from .models import User
+import datetime
 
 # Create your views here.
 def main_page(request):
@@ -39,6 +40,28 @@ def login(request):
 
     return render(request, 'web/main_login.html', {})
 
+# Function of sign up process
 def sign_up(request):
-    # 아직 구현이 안됨.
+    if request.method == 'POST':
+        id = request.POST['id']
+        pw = request.POST['pwd']
+        sex = request.POST['sex']
+        fullname = request.POST['name']
+        email = request.POST['email']
+        phone = request.POST['phonenumber']
+        birth_year = request.POST['birth_year']
+        birth_month = request.POST['birth_month']
+        birth_day = request.POST['birth_day']
+        authority = request.POST['Authority']
+
+        try:
+            obj = User.objects.create(username=id, password=pw, sex=sex,
+            full_name=fullname, email=email, phone_number=phone,
+            birthday=datetime.date(birth_year, birth_month, birth_day),
+            authority=authority)
+        except ValueError:
+            return render(request, 'web/sign_up.html', {})
+        except ValidationError:
+            return render(request, 'web/sign_up.html', {})
+
     return render(request, 'web/COLI_main.html', {})

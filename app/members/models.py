@@ -10,7 +10,9 @@ class PhoneNumbervalidator(validators.RegexValidator):
 
 
 class User(AbstractUser):
-
+    SEX = (('male', 'Male'), ('female', 'Female'))
+    sex = models.CharField(max_length=6, choices=SEX)
+    birthday = models.DateField()
     phone_number_validator = PhoneNumbervalidator()
     phone_number = models.CharField(
         'Phone Number',
@@ -21,3 +23,10 @@ class User(AbstractUser):
             'unique': 'A User with that Phone Number already exists'
         },
     )
+    AUTHORITIES = (
+        ('Owner', 'Pet Owner'),
+        ('Vet', 'Veterinarian'),
+        ('Comp', 'Company')
+    )
+    authority = models.CharField(max_length=5, choices=AUTHORITIES)
+    full_name = models.CharField('full name', max_length=180)
