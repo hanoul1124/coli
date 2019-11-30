@@ -26,21 +26,23 @@ def login(request):
         id = request.POST['id']
         pw = request.POST['pwd1']
         try:
-            # 아이디 검색
+            # find ID
             user = User.objects.get(username=id)
         except ObjectDoesNotExist:
-            # 아이디가 존재하지 않습니다.
+            # ID does not exist.
             return render(request, 'web/sign_in.html', {'error': True})
 
         if not user.check_password(pw):
-            # 비밀번호가 일치하지 않습니다.
+            # Password does not match.
             return render(request, 'web/sign_in.html', {'error': True})
 
         if user.authority == 'Comp':
+            # Company-only web page
             return render(request, 'web/main_company.html', {})
     else:
         raise Http404("404 Not Found.")
 
+    # default logined main page
     return render(request, 'web/main_login.html', {})
 
 # Function of sign up process
@@ -52,19 +54,25 @@ def sign_up(request):
         fullname = request.POST['name']
         email = request.POST['email']
         phone = request.POST['phonenumber']
-        birth_year = request.POST['birth_year']
-        birth_month = request.POST['birth_month']
-        birth_day = request.POST['birth_day']
+        birth_year = int(request.POST['birth_year'])
+        birth_month = int(request.POST['birth_month'])
+        birth_day = int(request.POST['birth_day'])
         authority = request.POST['Authority']
 
         try:
-            obj = User.objects.create(username=id, password=pw, sex=sex,
-            full_name=fullname, email=email, phone_number=phone,
-            birthday=datetime.date(birth_year, birth_month, birth_day),
-            authority=authority)
+            # User creation
+            obj = User.objects.create(
+                username=id, sex=sex, full_name=fullname,
+                email=email, phone_number=phone,
+                birthday=datetime.date(birth_year, birth_month, birth_day),
+                authority=authority
+            )
+            obj.set_password(pw)
         except ValueError:
+            # ValueError exception: datetime.date error
             return render(request, 'web/sign_up.html', {'signup_fail': True})
         except ValidationError:
+            # ValidationError exception: phone number validation error
             return render(request, 'web/sign_up.html', {'signup_fail': True})
     else:
         raise Http404("404 Not Found.")
