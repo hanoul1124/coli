@@ -6,7 +6,7 @@ import datetime
 
 # Create your views here.
 def main_page(request):
-    return render(request, 'web/COLI_main.html', {})
+    return render(request, 'web/COLI_main.html', {'signup': False})
 
 def main_page2(request):
     return render(request, 'web/main2.html', {})
@@ -18,7 +18,7 @@ def sign_in_page(request):
     return render(request, 'web/sign_in.html', {'error': False})
 
 def sign_up_page(request):
-    return render(request, 'web/sign_up.html', {})
+    return render(request, 'web/sign_up.html', {'signup_fail': False})
 
 # Function of login process
 def login(request):
@@ -35,6 +35,9 @@ def login(request):
         if not user.check_password(pw):
             # 비밀번호가 일치하지 않습니다.
             return render(request, 'web/sign_in.html', {'error': True})
+
+        if user.authority == 'Comp':
+            return render(request, 'web/main_company.html', {})
     else:
         raise Http404("404 Not Found.")
 
@@ -60,8 +63,10 @@ def sign_up(request):
             birthday=datetime.date(birth_year, birth_month, birth_day),
             authority=authority)
         except ValueError:
-            return render(request, 'web/sign_up.html', {})
+            return render(request, 'web/sign_up.html', {'signup_fail': True})
         except ValidationError:
-            return render(request, 'web/sign_up.html', {})
+            return render(request, 'web/sign_up.html', {'signup_fail': True})
+    else:
+        raise Http404("404 Not Found.")
 
-    return render(request, 'web/COLI_main.html', {})
+    return render(request, 'web/COLI_main.html', {'signup': True})
