@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.core import validators
 from django.db import models
+import datetime
 
 
 # Create your models here.
@@ -12,7 +13,7 @@ class PhoneNumbervalidator(validators.RegexValidator):
 class User(AbstractUser):
     SEX = (('male', 'Male'), ('female', 'Female'))
     sex = models.CharField(max_length=6, choices=SEX, default='male')
-    birthday = models.DateField()
+    birthday = models.DateField(default=datetime.date(1990,1,1))
     phone_number_validator = PhoneNumbervalidator()
     phone_number = models.CharField(
         'Phone Number',
@@ -33,4 +34,4 @@ class User(AbstractUser):
         choices=AUTHORITIES,
         default='Owner'
     )
-    full_name = models.CharField('full name', max_length=180)
+    full_name = models.CharField('full name', max_length=180, blank=True)
