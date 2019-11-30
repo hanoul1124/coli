@@ -38,12 +38,14 @@ def login(request):
 
         if user.authority == 'Comp':
             # Company-only web page
-            return render(request, 'web/main_company.html', {})
+            return render(request, 'web/main_company.html',
+            {'full_name': user.full_name, 'authority': user.get_authority_display()})
+        else:
+            # Default logined main page
+            return render(request, 'web/main_login.html',
+            {'full_name': user.full_name, 'authority': user.get_authority_display()})
     else:
         raise Http404("404 Not Found.")
-
-    # default logined main page
-    return render(request, 'web/main_login.html', {})
 
 # Function of sign up process
 def sign_up(request):
@@ -68,6 +70,7 @@ def sign_up(request):
                 authority=authority
             )
             obj.set_password(pw)
+            obj.save()
         except ValueError:
             # ValueError exception: datetime.date error
             return render(request, 'web/sign_up.html', {'signup_fail': True})
