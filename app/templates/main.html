@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!--네비게이션 바-->
+		<nav class="navbar navbar-expand-lg navbar-light sticky-top"
+             style="background-color: #ded8d8; padding: 0 8px">
+            <!--로고-->
+			<a href="#" class="navbar-brand">
+                <img src="{% static 'images/coli_logo.png' %}"
+                     width="50" height="50" alt="">
+            </a>
+			<!--메뉴 버튼-->
+			<ul class="navbar-nav ml-md-auto">
+	            {%  if user.is_authenticated %}
+                    <li class="nav-item mr-sm-1">
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-secondary">Logout</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li class="nav-item mr-sm-1">
+                        <a href="" class="btn btn-outline-secondary">Login</a>
+                    </li>
+                    <li class="nav-item mr-sm-1">
+                        <a href="" class="btn btn-outline-secondary">SignUp</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item mr-sm-1">
+					<a href="#" class="btn btn-outline-secondary">Contacts</a>
+				</li>
+			</ul>
+		</nav>
+    <div class="jumbotron-fluid position-relative p-5">
+        <img class="m-2" src = "{% static 'images/main_image.svg' %}", width = 65% >
+        <div class="container-fluid position-absolute text-right mr-5"
+             style="top: 40%; right: 0;">
+            <p style="font-size: 2.5vw; font-weight: 600;">COLI:Pet DID Service</p>
+            <p style="font-size: 1vw;">
+                Protect your Adorable friend with COLI
+            </p>
+            <p style="font-size: 1vw;">
+                It provides Identity of Pets as a distinct individual<br>
+          and Easement for managing Petsonal information<br>
+          by using Blockchain Technology
+            </p>
+        </div>
+    </div>
+{% endblock %}
