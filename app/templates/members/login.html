@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{#col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2#}
+<div class="container-fluid col-lg-10 col-md-8 col-sm-6"
+     style="border-radius: 1rem; border: 2px solid #7aa180; margin-top: 8rem; padding: 5rem;">
+    <img class="col-lg-4 offset-lg-2 col-md-8 offset-md-2 col-sm-6" src = "{% static 'images/sign_in_dog.png' %}">
+    <div class="align-middle col-lg-3 offset-lg-0 col-md-8 offset-md-2"
+         style="display: inline-block">
+        <h1 class="text-center">LOGIN</h1>
+        <small class="text-center text-danger font-weight-bold">
+            {{ error }}
+        </small>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In!</button>
+            <br>
+            <a href="#">Sign Up for free!</a>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

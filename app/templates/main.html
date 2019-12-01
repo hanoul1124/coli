@@ -14,17 +14,17 @@
 			<ul class="navbar-nav ml-md-auto">
 	            {%  if user.is_authenticated %}
                     <li class="nav-item mr-sm-1">
-                        <form action="" method="POST">
+                        <form action="{% url 'members:logout' %}" method="POST">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-outline-secondary">Logout</button>
                         </form>
                     </li>
                 {% else %}
                     <li class="nav-item mr-sm-1">
-                        <a href="" class="btn btn-outline-secondary">Login</a>
+                        <a href="{% url 'members:login' %}" class="btn btn-outline-secondary">Login</a>
                     </li>
                     <li class="nav-item mr-sm-1">
-                        <a href="" class="btn btn-outline-secondary">SignUp</a>
+                        <a href="{% url 'members:signup' %}" class="btn btn-outline-secondary">SignUp</a>
                     </li>
                 {% endif %}
                 <li class="nav-item mr-sm-1">
@@ -33,14 +33,12 @@
 			</ul>
 		</nav>
     <div class="jumbotron-fluid position-relative p-5">
-        <img class="m-2" src = "{% static 'images/main_image.svg' %}", width = 65% >
-        <div class="container-fluid position-absolute text-right mr-5"
-             style="top: 40%; right: 0;">
+        <img class="m-2" src = "{% static 'images/main_image.svg' %}" width="60%">
+        <div class="container-fluid position-absolute text-right"
+             style="top: 40%; right: 0; margin-right: 8rem">
             <p style="font-size: 2.5vw; font-weight: 600;">COLI:Pet DID Service</p>
             <p style="font-size: 1vw;">
-                Protect your Adorable friend with COLI
-            </p>
-            <p style="font-size: 1vw;">
+                Protect your Adorable friend with COLI<br><br>
                 It provides Identity of Pets as a distinct individual<br>
           and Easement for managing Petsonal information<br>
           by using Blockchain Technology

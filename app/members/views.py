@@ -1,38 +1,41 @@
-# from django.shortcuts import render
-# from django.http import Http404
-# from django.core.exceptions import ObjectDoesNotExist, ValidationError
-# from .models import User
-# import datetime
-#
-# # Create your views here.
-# # Function of login process
-# def login(request):
-#     if request.method == 'POST':
-#         id = request.POST['id']
-#         pw = request.POST['pwd1']
-#         try:
-#             # find ID
-#             user = User.objects.get(username=id)
-#         except ObjectDoesNotExist:
-#             # ID does not exist.
-#             return render(request, 'web/sign_in.html', {'error': True})
-#
-#         if not user.check_password(pw):
-#             # Password does not match.
-#             return render(request, 'web/sign_in.html', {'error': True})
-#
-#         if user.authority == 'Comp':
-#             # Company-only web page
-#             return render(request, 'web/main_company.html',
-#             {'full_name': user.full_name, 'authority': user.get_authority_display()})
-#         else:
-#             # Default logined main page
-#             return render(request, 'web/main_login.html',
-#             {'full_name': user.full_name, 'authority': user.get_authority_display()})
-#     else:
-#         raise Http404("404 Not Found.")
-#
-# # Function of sign up process
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect
+from django.http import Http404
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
+
+from .forms import LoginForm
+from .models import User
+import datetime
+
+
+# Create your views here.
+# Function of login process
+def login_view(request):
+    context = {
+        'form': LoginForm()
+    }
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('main')
+
+        else:
+            context['error'] = '잘못된 ID 혹은 Password를 입력하셨습니다.'
+    return render(request, 'members/login.html', context)
+
+
+def logout_view(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('main')
+
+# Function of sign up process
+def signup_view(request):
+    pass
 # def sign_up(request):
 #     if request.method == 'POST':
 #         id = request.POST['id']
