@@ -3,7 +3,7 @@
 
 {% block content %}
     <!--네비게이션 바-->
-		<nav class="navbar navbar-expand-lg navbar-light sticky-top"
+		<nav class="navbar navbar-expand-lg navbar-light sticky-top d-flex"
              style="background-color: #ded8d8; padding: 0 8px">
             <!--로고-->
 			<a href="#" class="navbar-brand">
@@ -13,12 +13,16 @@
 			<!--메뉴 버튼-->
 			<ul class="navbar-nav ml-md-auto">
 	            {%  if user.is_authenticated %}
-                    <li class="nav-item mr-sm-1">
+                    <li class="nav-item mr-sm-1 text-secondary font-weight-bold align-self-center">
+                            Welcome! {{ user.get_full_name }}
+                    </li>
+                    <li class="nav-item mr-sm-1 ml-1">
                         <form action="{% url 'members:logout' %}" method="POST">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-outline-secondary">Logout</button>
                         </form>
                     </li>
+
                 {% else %}
                     <li class="nav-item mr-sm-1">
                         <a href="{% url 'members:login' %}" class="btn btn-outline-secondary">Login</a>

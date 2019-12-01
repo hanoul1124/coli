@@ -34,4 +34,3 @@ class User(AbstractUser):
         choices=AUTHORITIES,
         default='Owner'
     )
-    # full_name = models.CharField('full name', max_length=180, blank=True)
