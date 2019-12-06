@@ -26,6 +26,7 @@ class LoginForm(forms.Form):
 
 
 class SignupForm(forms.Form):
+    # Public_key는 회원가입에서 표기하지 않으므로 제외한다.
     username = forms.CharField(
         widget=forms.TextInput(
             attrs={

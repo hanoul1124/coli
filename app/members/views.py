@@ -1,6 +1,7 @@
+from bigchaindb_driver.crypto import generate_keypair
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 
 from .forms import LoginForm, SignupForm
@@ -79,36 +80,18 @@ def signup_view(request):
                 context["error"] = f'회원가입에 실패했습니다(잘못된 휴대전화 번호 기입)'
     return render(request, 'members/signup.html', context)
 
-# def sign_up(request):
-#     if request.method == 'POST':
-#         id = request.POST['id']
-#         pw = request.POST['pwd']
-#         sex = request.POST['sex']
-#         fullname = request.POST['name']
-#         email = request.POST['email']
-#         phone = request.POST['phonenumber']
-#         birth_year = int(request.POST['birth_year'])
-#         birth_month = int(request.POST['birth_month'])
-#         birth_day = int(request.POST['birth_day'])
-#         authority = request.POST['Authority']
-#
-#         try:
-#             # User creation
-#             obj = User.objects.create(
-#                 username=id, sex=sex, full_name=fullname,
-#                 email=email, phone_number=phone,
-#                 birthday=datetime.date(birth_year, birth_month, birth_day),
-#                 authority=authority
-#             )
-#             obj.set_password(pw)
-#             obj.save()
-#         except ValueError:
-#             # ValueError exception: datetime.date error
-#             return render(request, 'web/sign_up.html', {'signup_fail': True})
-#         except ValidationError:
-#             # ValidationError exception: phone number validation error
-#             return render(request, 'web/sign_up.html', {'signup_fail': True})
-#     else:
-#         raise Http404("404 Not Found.")
-#
-#     return render(request, 'web/COLI_main.html', {'signup': True})
+
+def generate_user_key(request):
+    # Blockchain keypair 생성
+    user_keypair = generate_keypair()
+    user = request.user
+    user.public_key = user_keypair.public_key
+    user.save()
+
+    # User private key download
+    filename = 'private_key.txt'
+    response = HttpResponse(
+        user_keypair.private_key, content_type='text/plain'
+    )
+    response['Content-Disposition'] = f'attachment; filename={filename}'
+    return response
