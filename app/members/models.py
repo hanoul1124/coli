@@ -1,3 +1,4 @@
+from bigchaindb_driver import BigchainDB
 from django.contrib.auth.models import AbstractUser
 from django.core import validators
 from django.db import models
@@ -46,3 +47,11 @@ class User(AbstractUser):
         blank=True,
         null=True
     )
+
+    @property
+    def have_asset(self):
+        db = BigchainDB('https://test.ipdb.io/')
+        if db.metadata.get(search=self.public_key):
+            return True
+        else:
+            return False
