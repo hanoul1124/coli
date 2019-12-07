@@ -176,6 +176,7 @@
               Also be careful not to spill it outside.
           </p>
           <a class="btn btn-primary btn-lg" href="{% url 'members:keygen' %}" role="button">Get your Keys!</a>
+          <a class="btn btn-secondary btn-lg" href="{% url 'main' %}" role="button">Return to Home</a>
         </div>
 {#----------------#}
     {% elif user.is_authenticated and user.public_key %}
