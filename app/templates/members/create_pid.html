@@ -6,6 +6,7 @@
 {{ form.media }}
 {% endblock %}
 
+
 {% block content %}
 <div class="container-fluid col-lg-10 col-md-8 col-sm-6"
      style="border-radius: 1rem;
@@ -15,11 +16,11 @@
             src="{% static 'images/sign_in_dog.png' %}"
          style="width: 30%; position: absolute; top: 30%; left: 10%" alt="">
     <div class="container-fluid align-middle">
-        <h1 class="text-center col-lg-3 offset-lg-7 col-md-8 offset-md-2 col-sm-8 offset-sm-3">SIGNUP</h1>
+        <h1 class="text-center col-lg-3 offset-lg-7 col-md-8 offset-md-2 col-sm-8 offset-sm-3">PET INFO</h1>
         <small class="text-center text-danger font-weight-bold">
             {{ error }}
         </small>
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {% for field in form %}
                 <div class="form-group col-lg-5 offset-lg-6 col-md-10 offset-md-1 col-sm-10 offset-sm-3">
@@ -29,8 +30,8 @@
                     {{ field }}
                  </div>
             {% endfor %}
-            <button class="btn btn-lg btn-primary btn-block col-lg-3 offset-lg-7 col-md-8 offset-md-2 col-sm-8 offset-sm-3"
-                    type="submit">Sign In!</button>
+            <button class="btn btn-lg btn-block col-lg-3 offset-lg-7 col-md-8 offset-md-2 col-sm-8 offset-sm-3"
+                    type="submit" style="background-color: #7aa180; color: white;">Get PID!</button>
         </form>
     </div>
 </div>

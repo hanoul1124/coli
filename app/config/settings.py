@@ -24,7 +24,6 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_DIR = os.path.join(ROOT_DIR, '.secrets')
 secrets = json.load(open(os.path.join(SECRET_DIR, 'base.json')))
-
 SECRET_KEY = secrets['SECRET_KEY']
 
 # Auth User Model
@@ -59,6 +58,8 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'members',
+    'bootstrap4',
+    'bootstrap_datepicker_plus',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

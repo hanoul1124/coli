@@ -1,4 +1,8 @@
 {% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
 <!doctype html>
 <html lang="ko">
 <head>
@@ -15,6 +19,8 @@
             background-color: #d6d0d0;
         }
     </style>
+    {% block extrahead %}
+    {% endblock %}
     <title>COLI</title>
 </head>
 <body>

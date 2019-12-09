@@ -48,6 +48,10 @@ class User(AbstractUser):
         null=True
     )
 
+    # 해당 로그인 유저가 가진 public key를 블록체인 DB상의 metadata에서 검색한다
+    # Asset의 트랜잭션 metadata에는 항상 현재 소유자 public key를 기록할 것
+    # 확인 후 metadata 중 해당 public key가 존재한다면 해당 유저가 등록한 DID가 있다는 뜻
+    # True/False를 리턴한다
     @property
     def have_asset(self):
         db = BigchainDB('https://test.ipdb.io/')
@@ -55,3 +59,24 @@ class User(AbstractUser):
             return True
         else:
             return False
+
+
+# 복수의 PID를 가질 수 있으므로, Foreign Key를 사용하는 방식을 채택
+class LatestTransaction(models.Model):
+    # 어떤 유저의 최신 트랜잭션인지
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
+    )
+    # 보유 Asset의 트랜잭션 ID(가장 최신)
+    asset_id = models.CharField(max_length=150, blank=True, null=True)
+    # 해당 유저의 몇 번째 Asset에 대한 트랜잭션인지(same with 'pet_entry')
+    entry_num = models.PositiveSmallIntegerField(blank=True, null=True)
+    # 해당 트랜잭션이 현재 상대의 서명이 완료된 상태인지
+    # 가령, 수의사가 진단 자료를 작성 중인 경우, 유저로부터 펫 소유권을 일시적으로 TRASNFER 받음
+    # 이후 수의사가 진단 자료를 작성해 Asset data가 추가된 상태로
+    # 본래 유저에게 TRANSFER를 요청하여, 유저가 private key로 이를 서명
+    # 유저가 반환 받아 서명하기 전까지는 비활성화 상태(=승인 대기중)
+    is_active = models.BooleanField(default=True, blank=True)

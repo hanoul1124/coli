@@ -13,25 +13,25 @@
 			<!--메뉴 버튼-->
 			<ul class="navbar-nav ml-md-auto">
 	            {%  if user.is_authenticated %}
-                    <li class="nav-item mr-sm-1 text-success font-weight-bold align-self-center">
-                            <b>Welcome! {{ user.get_full_name }}</b>
+                    <li class="nav-item text-success font-weight-bold align-self-center mr-sm-2">
+                            <b>Welcome! {{ user.get_short_name }}</b>
                     </li>
-                    <li class="nav-item mr-sm-3 ml-3">
-                        <form action="{% url 'members:logout' %}" method="POST">
+                    <li class="nav-item align-self-center mr-sm-2">
+                        <form action="{% url 'members:logout' %}" method="POST" style="margin: 0">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-outline-secondary">Logout</button>
                         </form>
                     </li>
 
                 {% else %}
-                    <li class="nav-item mr-sm-2">
+                    <li class="nav-item align-self-center mr-sm-2">
                         <a href="{% url 'members:login' %}" class="btn btn-outline-secondary">Login</a>
                     </li>
-                    <li class="nav-item mr-sm-2">
+                    <li class="nav-item align-self-center mr-sm-2">
                         <a href="{% url 'members:signup' %}" class="btn btn-outline-secondary">SignUp</a>
                     </li>
                 {% endif %}
-                <li class="nav-item mr-sm-1">
+                <li class="nav-item align-self-center mr-sm-2">
 					<a href="#" class="btn btn-outline-secondary">Contacts</a>
 				</li>
 			</ul>
@@ -185,20 +185,41 @@
             <div class="jumbotron col-lg-6 offset-lg-3 col-md-8 offset-md-2"
                  style="margin-top: 6%; background-color: #cfccca; border: solid 2px #8fd19e">
               <h1 class="display-5">Issue your New DID</h1>
-              <p class="lead">
-                  You haven't made a <span style="color: #7aa180;">DID</span> yet!<br>
-                  Please Visit a Vet near your home and Create an DID
-              </p>
-              <hr class="my-4">
-              <p class="text-info font-weight-bold">
-                Note: <br>
-                  If you are registering a DID with your vet now,<br>
-                  press the CREATE button below.
-              </p>
-              <a class="btn btn-success btn-lg offset-lg-10 offset-md-9"
-                 href="{% url 'main' %}" role="button">CREATE</a>
+
+              <!--for Pet Owner-->
+              {% if user.authority == 'Owner' %}
+                  <p class="lead">
+                      You haven't made a <span style="color: #7aa180;">PID</span> yet!<br>
+                      Please Visit a Vet near your home and Create an PID
+                  </p>
+                  <hr class="my-4">
+                  <p class="text-info font-weight-bold">
+                    Note: <br>
+                      If you are registering a DID with your vet now,<br>
+                      press the CREATE button below.
+                  </p>
+                  <a class="btn btn-success btn-lg offset-lg-10 offset-md-9"
+                 href="{% url 'members:pidgen' %}" role="button">CREATE</a>
+
+              <!--for Vet of Company-->
+              {% else %}
+                  <p class="lead">
+                      You haven't made a <span style="color: #7aa180;">DID</span> yet!<br>
+                      Please Fill out the following form and <br>
+                      submit the required materials to issue a DID.
+                  </p>
+                  <hr class="my-4">
+                  <p class="text-info font-weight-bold">
+                    Note: <br>
+                      Credentials for veterinarians and pet services companies are required.<br>
+                      Press the CREATE button to continue.
+                  </p>
+                 <!--didgen url로 이동하도록-->
+                  <a class="btn btn-success btn-lg offset-lg-10 offset-md-9"
+                    href="{% url 'main' %}" role="button">CREATE</a>
+              {% endif %}
+
             </div>
-        {% else %}
         {% endif %}
     {% endif %}
 {% endblock %}
