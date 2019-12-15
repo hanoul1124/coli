@@ -52,7 +52,7 @@ def signup_view(request):
         password2 = request.POST['password2']
         last_name = request.POST['last_name']
         first_name = request.POST['first_name']
-        birthdate = request.POST['birthdate']
+        birthdate = datetime.datetime.strptime(request.POST['birthdate'], '%m/%d/%Y').strftime('%Y-%m-%d')
         sex = request.POST['sex']
         email = request.POST['email']
         phone_number = request.POST['phone_number']
