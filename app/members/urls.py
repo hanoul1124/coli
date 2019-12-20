@@ -12,4 +12,6 @@ urlpatterns = [
     path('keygen/', views.generate_user_key, name='keygen'),
     path('pidgen/', views.create_pid, name='pidgen'),
     path('owners/', views.owners_view, name='owners'),
+    path('transactions/', views.transaction_view, name='transactions'),
+    path('browsers/', views.browse_view, name='browsers'),
 ]

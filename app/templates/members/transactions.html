@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<!--네비게이션 바-->
+<nav class="navbar navbar-expand-lg navbar-light sticky-top d-flex"
+     style="background-color: #ded8d8; padding: 0 8px">
+    <!--로고-->
+    <a href="#" class="navbar-brand">
+        <img src="{% static 'images/coli_logo.png' %}"
+             width="50" height="50" alt="">
+    </a>
+    <!--메뉴 버튼-->
+    <ul class="navbar-nav ml-md-auto">
+        {%  if user.is_authenticated %}
+            <li class="nav-item text-success font-weight-bold align-self-center mr-sm-2">
+                    <b>Welcome! {{ user.get_short_name }}</b>
+            </li>
+            <li class="nav-item align-self-center mr-sm-2">
+                <form action="{% url 'members:logout' %}" method="POST" style="margin: 0">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-secondary">Logout</button>
+                </form>
+            </li>
+
+        {% else %}
+            <li class="nav-item align-self-center mr-sm-2">
+                <a href="{% url 'members:login' %}" class="btn btn-outline-secondary">Login</a>
+            </li>
+            <li class="nav-item align-self-center mr-sm-2">
+                <a href="{% url 'members:signup' %}" class="btn btn-outline-secondary">SignUp</a>
+            </li>
+        {% endif %}
+        <li class="nav-item align-self-center mr-sm-2">
+            <a href="#" class="btn btn-outline-secondary">Contacts</a>
+        </li>
+    </ul>
+</nav>
+<div class="d-flex flex-column justify-content-center" style="padding: 5%" >
+    <h4>
+        <span class="text-success">
+        {% if user.public_key %}
+            {{ user.public_key }}
+        {% else %}
+            9t98CNNKo6Fp24EXUpy1WD5VoD3HZhuudYQtESwNnXdE
+        {% endif %}
+        </span>'s Trasanction records
+    </h4>
+    <br><br>
+    <h1>HARU's trasaction</h1>
+    <table class="table" style="margin-bottom: 5rem">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Timestamp</th>
+          <th scope="col">Agent</th>
+          <th scope="col">Type</th>
+          <th scope="col">Content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">4</th>
+          <td>12/10/2019, 16:25</td>
+          <td>9t98CNNKo6F...</td>
+          <td>EDIT</td>
+          <td>profile image changed</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>12/04/2019, 11:38</td>
+          <td>D3HZhuudYQtES...</td>
+          <td>ADD</td>
+          <td>Neutralization surgery</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>07/18/2019, 08:11</td>
+          <td>D3HZhuudYQtES...</td>
+          <td>ADD</td>
+          <td>First health check</td>
+        </tr>
+        <tr>
+          <th scope="row">1</th>
+          <td>06/24/2019, 16:01</td>
+          <td>the 9t98CNNKo6F...</td>
+          <td>CREATE</td>
+          <td>PID CREATED</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h1>KITTY's trasaction</h1>
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Timestamp</th>
+              <th scope="col">Agent</th>
+              <th scope="col">Type</th>
+              <th scope="col">Content</th>
+            </tr>
+        </thead>
+         <tbody>
+            <tr>
+              <th scope="row">4</th>
+              <td>12/24/2019, 19:10</td>
+              <td>24EXUpy1WD5V...</td>
+              <td>RETRIEVE</td>
+              <td>Pet Medical records checked</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>11/28/2019, 12:33</td>
+              <td>D3HZhuudYQtES...</td>
+              <td>ADD</td>
+              <td>Patellar Dislocation surgery</td>
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td>10/01/2019, 14:01</td>
+              <td>9t98CNNKo6F...</td>
+              <td>CREATE</td>
+              <td>PID CREATED</td>
+            </tr>
+         </tbody>
+    </table>
+
+</div>
+{% endblock %}

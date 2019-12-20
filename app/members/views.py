@@ -224,13 +224,29 @@ def create_pid(request):
 
 
 # Vet, Company User ID Create
+# 시간이 없으니 스킵
 def create_did(request):
     pass
 
 
 # Owner 로그인 후 화면(PID 생성 진행 이후)
 def owners_view(request):
+    # 실제로는 여기서 해당 유저의 BigchainDB 트랜잭션을 찾아서 전달해야함
+    # 시간이 없으니 그냥 보여주기용만 만들도록 함
     return render(request, 'members/owners.html')
+
+
+# Browse 결과 화면
+# 실제 검색 기능이 제외됨
+def transaction_view(request):
+    return render(request, 'members/transactions.html')
+
+
+# Vet, Company Browser view
+# 실제로는 더 많은 인증 과정 및 기능이 추가되어야 하나
+# 양이 방대하여 시간이 너무 오래걸림
+def browse_view(request):
+    return render(request, 'members/browsers.html')
 
 
 # Asset Data 정의
